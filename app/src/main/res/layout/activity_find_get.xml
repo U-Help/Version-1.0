@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/background3">
+
+
+    <TextView
+        android:id="@+id/textView16f"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp" />
+    <Button
+        android:id="@+id/btnPush"
+        android:layout_width="160dp"
+        android:layout_height="60dp"
+        android:background="@drawable/change_color_btn"
+        android:layout_alignTop="@id/textView16f"
+        android:layout_toLeftOf="@id/textView16f"
+        android:gravity="center"
+        android:text="发  布"
+        android:textColor="#ffffffff"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_alignTop="@+id/btnPush"
+        android:layout_toRightOf="@+id/textView16f"
+        android:background="@drawable/change_color_button_red"
+        android:gravity="center"
+        android:text="取     消"
+        android:textColor="#ffffffff"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+
+    <EditText
+        android:id="@+id/editDstplace"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textView15f"
+        android:background="@drawable/edit_bg"
+        android:ems="10"
+        android:gravity="fill_vertical"
+        android:hint="请输入收货地址"
+        android:inputType="none"
+        android:paddingLeft="10dp" />
+
+    <EditText
+        android:id="@+id/editRecePassword"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/textView11f"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/edit_bg"
+        android:ems="10"
+        android:gravity="fill_vertical"
+        android:hint="请输入取件密码"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp" />
+
+    <EditText
+        android:id="@+id/editTime"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_bg"
+        android:ems="10"
+        android:gravity="fill_vertical"
+        android:hint="请输入收货时间  例：2018-8-1 9:30"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp" />
+
+    <EditText
+        android:id="@+id/editSize"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textView13f"
+        android:background="@drawable/edit_bg"
+        android:ems="10"
+        android:gravity="fill_vertical"
+        android:hint="请输入货物大小"
+        android:inputType="text"
+        android:paddingLeft="10dp" />
+
+    <EditText
+        android:id="@+id/editPrice"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textView12f"
+        android:background="@drawable/edit_bg"
+        android:ems="10"
+        android:gravity="fill_vertical"
+        android:hint="请输入价格"
+        android:inputType="text"
+        android:paddingLeft="10dp" />
+
+    <EditText
+        android:id="@+id/editAddress"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textView14f"
+        android:background="@drawable/edit_bg"
+        android:ems="10"
+        android:gravity="fill_vertical"
+        android:hint="请输入取件地址"
+        android:paddingLeft="10dp" />
+
+
+    <!--<TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/spin"
+        android:layout_alignStart="@+id/editTelephone"
+        android:text="请选择收货地址"
+        android:textColor="#000"
+        android:textSize="18sp" />-->
+
+    <!--<Spinner
+        android:id="@+id/spin"
+        android:layout_width="212dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/editTelephone"
+        android:layout_marginBottom="152dp"
+        android:spinnerMode="dialog" />-->
+
+    <TextView
+        android:id="@+id/textView11f"
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:layout_below="@id/editTime"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView12f"
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:layout_below="@+id/editRecePassword"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView13f"
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:layout_below="@+id/editPrice"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView14f"
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:layout_below="@+id/editSize"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView15f"
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:layout_below="@+id/editAddress"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>

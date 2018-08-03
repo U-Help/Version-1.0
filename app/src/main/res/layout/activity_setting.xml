@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/background5">
+
+    <Button
+        android:id="@+id/btnShare"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/textView7"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/change_color_button2"
+        android:gravity="center"
+        android:text="分享"
+        android:textColor="#ffffffff"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/btnHelp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/btnShare"
+        android:background="@drawable/change_color_button2"
+        android:gravity="center"
+        android:text="帮助与反馈"
+        android:textColor="#ffffffff"
+        android:textSize="20dp" />
+
+
+    <Button
+        android:id="@+id/btnTongxunlu"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/btnHelp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/change_color_button2"
+        android:gravity="center"
+        android:text="通信录绑定"
+        android:textColor="#ffffffff"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/btngongzhonghao"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/btnTongxunlu"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/change_color_button2"
+        android:gravity="center"
+        android:text="公众号绑定"
+        android:textColor="#ffffffff"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/btnPasser"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/btngongzhonghao"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/change_color_button2"
+        android:gravity="center"
+        android:text="快递员模式"
+        android:textColor="#ffffffff"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/btnAddress"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/btnPasser"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/change_color_button2"
+        android:gravity="center"
+        android:text="地址管理"
+        android:textColor="#ffffffff"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/btnInform"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/btnAddress"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/change_color_button2"
+        android:gravity="center"
+        android:text="消息通知"
+        android:textColor="#ffffffff"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/btnPasswordchange"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/btnInform"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/change_color_button2"
+        android:gravity="center"
+        android:text="修改密码"
+        android:textColor="#ffffffff"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:background="#ef424242"
+        android:gravity="center"
+        android:text="设       置"
+        android:textColor="#ffffffff"
+        android:textSize="30dp" />
+</RelativeLayout>

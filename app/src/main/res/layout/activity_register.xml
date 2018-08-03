@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/background3">
+
+
+    <Button
+        android:id="@+id/btnregister"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_above="@+id/tv"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/change_color_btn"
+        android:gravity="center"
+        android:text="注     册"
+        android:textColor="#ffffffff"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:layout_marginBottom="20dp" />
+
+
+    <EditText
+        android:id="@+id/editEmail"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/textView2re"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/edit_bg"
+        android:ems="10"
+        android:gravity="fill_vertical"
+        android:hint="请输入邮箱地址"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="10dp" />
+
+    <EditText
+        android:id="@+id/editUsename"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/textView2r"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/edit_bg"
+        android:ems="10"
+        android:gravity="fill_vertical"
+        android:hint="请输入用户名"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp" />
+
+    <EditText
+        android:id="@+id/editpassword"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textView4r"
+        android:background="@drawable/edit_bg"
+        android:ems="10"
+        android:gravity="fill_vertical"
+        android:hint="请输入密码"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp" />
+
+    <EditText
+        android:id="@+id/editTelephone"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textView3r"
+        android:background="@drawable/edit_bg"
+        android:ems="10"
+        android:gravity="fill_vertical"
+        android:hint="请输入手机号"
+        android:inputType="phone"
+        android:paddingLeft="10dp" />
+
+    <TextView
+        android:id="@+id/textView2r"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editEmail"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView3r"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editUsename"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView4r"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTelephone"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView2re"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

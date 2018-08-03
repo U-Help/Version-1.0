@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/background4">
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="201dp"
+        android:background="#00000000"
+        android:text="设为默认地址"
+        android:paddingLeft="10dp"
+        android:textColor="#ffffffff"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/change_color_btn_green"
+        android:text="保      存"
+        android:textColor="#ffffffff"
+        android:textSize="24sp"/>
+
+    <EditText
+        android:id="@+id/autoCompleteTextView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/edit_bg"
+        android:hint="收件人"
+        android:paddingLeft="10dp"
+        android:textColor="#ff404040"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/autoCompleteTextView2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/autoCompleteTextView"
+        android:background="@drawable/edit_bg"
+        android:hint="手    机"
+        android:paddingLeft="10dp"
+        android:textColor="#ff404040"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/autoCompleteTextView3"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="145dp"
+        android:background="@drawable/edit_bg"
+        android:gravity="left"
+        android:hint="地    址"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:textColor="#ff404040"
+        android:textSize="20sp" />
+
+</RelativeLayout>

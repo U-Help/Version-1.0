@@ -1,0 +1,20 @@
+table personal_information:
+create table personal_information(username varchar(40)character set utf8 collate utf8_unicode_ci,password varchar(20)character set utf8 collate utf8_unicode_ci,realname varchar(40)character set utf8 collate utf8_unicode_ci,phonenumber varchar(20)character set utf8 collate utf8_unicode_ci,addr varchar(200)character set utf8 collate utf8_unicode_ci);
+insert into personal_information values('cool_boy','123456','小李','1888888888','西区5号楼611');
+
+
+table publishing_interface:
+create table publishing_interface(username varchar(40)character set utf8 collate utf8_unicode_ci,time varchar(40)character set utf8 collate utf8_unicode_ci,package_addr varchar(200)character set utf8 collate utf8_unicode_ci);
+insert into publishing_interface values('cool_boy','2018-6-30-8:00','西区东门口');
+
+
+table hall:
+create table hall(username varchar(40)character set utf8 collate utf8_unicode_ci,sex varchar(10)character set utf8 collate utf8_unicode_ci,time varchar(40)character set utf8 collate utf8_unicode_ci,package_addr varchar(200)character set utf8 collate utf8_unicode_ci);
+insert into hall values('cool_boy','男','2018-6-30-8:00','西区东门口');
+
+
+table publisher_information:
+create table publisher_information(username varchar(40)character set utf8 collate utf8_unicode_ci,sex varchar(10)character set utf8 collate utf8_unicode_ci,package_addr varchar(200)character set utf8 collate utf8_unicode_ci,addr varchar(200)character set utf8 collate utf8_unicode_ci,time varchar(40)character set utf8 collate utf8_unicode_ci,phonenumber varchar(20)character set utf8 collate utf8_unicode_ci); 
+insert into publisher_information values('cool_boy','男','西区东门口','西区5号楼611','2018-6-30-8:00','1888888888');
+
+
