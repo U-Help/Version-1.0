@@ -30,9 +30,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import android.view.KeyEvent;
 
 public class GetActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    //保存点击的时间
+    private long exitTime = 0;
     private Button btn_get;
     private Button btn_help;
     private Button btn_status;
@@ -410,5 +413,19 @@ public class GetActivity extends AppCompatActivity implements NavigationView.OnN
                 }
             }
         });
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                Toast.makeText(getApplicationContext(), "再按一次退出程序",
+                        Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                System.exit(0);
+            }
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
