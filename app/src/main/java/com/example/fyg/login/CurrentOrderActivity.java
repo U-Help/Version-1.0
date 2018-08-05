@@ -102,15 +102,12 @@ public class CurrentOrderActivity extends AppCompatActivity implements SwipeRefr
                 postProposal();
                 //postAccepter();
                 //getData();
-                mSwipeLayout.setRefreshing(false);
             }
         });
         new Handler().post(new Runnable() {
             @Override
             public void run() {
                 //获取数据
-                list.clear();
-                //postProposal();
                 postAccepter();
                 getData();
                 mSwipeLayout.setRefreshing(false);

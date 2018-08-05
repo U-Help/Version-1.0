@@ -205,14 +205,14 @@ public class ProposalActivity extends AppCompatActivity implements SwipeRefreshL
             @Override
             public void run() {
                 //获取数据
-                User user=new User();
-                postReInfo(user.denum);
                 Proposer proposer=new Proposer();
                 int num=proposer.num;
                 if(proposer.proposers[num].express_state==1) {
+                    postReInfo1(num);
                     init1();
                 }
                 else{
+                    postReInfo2(num);
                     init2();
                 }
                 mSwipeLayout.setRefreshing(false);
@@ -285,9 +285,10 @@ public class ProposalActivity extends AppCompatActivity implements SwipeRefreshL
         });
     }
 
-    public void postReInfo(int j){
+    public void postReInfo1(int j){
         OkHttpClient client = new OkHttpClient();
         User user=new User();
+        //user.denum=j;
         Proposer proposer=new Proposer();
         int i=user.id;
         String id=Integer.toString(i);
@@ -367,7 +368,90 @@ public class ProposalActivity extends AppCompatActivity implements SwipeRefreshL
                 }
             }
         });
-    }/**/
+    }
+
+    public void postReInfo2(int j){
+        OkHttpClient client = new OkHttpClient();
+        User user=new User();
+        //user.denum=j;
+        Proposer proposer=new Proposer();
+        int i=user.id;
+        String id=Integer.toString(i);
+        String token=user.token;
+        String item_id=proposer.proposers[j].item_id;
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("item_id",item_id);
+        map.put("id", id);
+        map.put("token", token);
+        JSONObject jsonObject = new JSONObject(map);
+        String jsonStr = jsonObject.toString();
+        RequestBody body = RequestBody.create(JSON, jsonStr);
+        Request request = new Request.Builder()
+                .url("http://47.100.116.160/item/proposer_user3")
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Looper.prepare();
+                Looper.loop();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    boolean flag = false;
+                    try {
+                        String str = response.body().string();
+
+                        JSONObject jsonStr = new JSONObject(str);
+                        JSONObject jsonObject1=jsonStr.getJSONObject("data");
+                        if (jsonStr.getString("state").equals("success")) {
+                            flag = true;
+                            Proposer proposer1=new Proposer();
+                            int j=proposer1.num;
+                            proposer1.proposers[j].setDstplace(jsonObject1.getString("dstplace"));
+                            //System.out.println(proposer1.proposers[j].dstplace);
+                            proposer1.proposers[j].setSrcplace(jsonObject1.getString("srcplace"));
+                            //System.out.println(proposer1.proposers[j].srcplace);
+                            //System.out.println(proposer1.proposers[j].user);
+                            proposer1.proposers[j].setRece_time(jsonObject1.getString("rece_time"));
+                            //System.out.println(proposer1.proposers[j].rece_time);
+                            //System.out.println(proposer1.proposers[j].rephone);
+                            proposer1.proposers[j].setPrice(jsonObject1.getString("price"));
+                            //System.out.println(proposer1.proposers[j].price);
+                            proposer1.proposers[j].setSize(jsonObject1.getString("size"));
+                            //System.out.println(proposer1.proposers[j].size);
+                            proposer1.proposers[j].setRev_password(jsonObject1.getString("rev_password"));
+                            //System.out.println(proposer1.proposers[j].rev_password);
+                            proposer1.proposers[j].setMsg(jsonObject1.getString("msg"));
+                            //System.out.println(proposer1.proposers[j].msg);
+                            proposer1.proposers[j].setItem_id(jsonObject1.getString("item_id"));
+                            //System.out.println(proposer1.proposers[j].item_id);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    if (flag) {
+                        Looper.prepare();
+                        //Toast.makeText(GetActivity.this, "获取订单成功", Toast.LENGTH_LONG).show();
+                        Looper.loop();
+                    } else {
+                        Looper.prepare();
+                        //Toast.makeText(GetActivity.this, "获取订单失败", Toast.LENGTH_LONG).show();
+                        Looper.loop();
+                    }
+                } else {
+                    Looper.prepare();
+                    //Toast.makeText(GetActivity.this, "服务器未响应" + response.body().string(), Toast.LENGTH_LONG).show();
+                    Looper.loop();
+                }
+            }
+        });
+    }
 
     @Override
     protected void onDestroy(){

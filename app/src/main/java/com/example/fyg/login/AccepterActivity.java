@@ -160,7 +160,6 @@ public class AccepterActivity extends AppCompatActivity implements SwipeRefreshL
         System.out.println(j);
         OkHttpClient client = new OkHttpClient();
         User user=new User();
-        user.denum=j;
         final Accepter accepter=new Accepter();
         int i=user.id;
         String id=Integer.toString(i);
@@ -246,8 +245,8 @@ public class AccepterActivity extends AppCompatActivity implements SwipeRefreshL
             @Override
             public void run() {
                 //获取数据
-                User user=new User();
-                postGeInfo(user.denum);
+                Accepter accepter=new Accepter();
+                postGeInfo(accepter.num);
                 init();
                 mSwipeLayout.setRefreshing(false);
             }
