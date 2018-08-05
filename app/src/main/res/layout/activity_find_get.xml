@@ -25,19 +25,19 @@
         android:layout_alignTop="@id/textView16f"
         android:layout_toLeftOf="@id/textView16f"
         android:gravity="center"
-        android:text="发  布"
+        android:text="发   布"
         android:textColor="#ffffffff"
         android:textSize="20dp" />
 
     <Button
         android:id="@+id/btnCancel"
-        android:layout_width="150dp"
+        android:layout_width="160dp"
         android:layout_height="60dp"
         android:layout_alignTop="@+id/btnPush"
         android:layout_toRightOf="@+id/textView16f"
         android:background="@drawable/change_color_button_red"
         android:gravity="center"
-        android:text="取     消"
+        android:text="取   消"
         android:textColor="#ffffffff"
         android:textSize="20dp" />
 
@@ -98,7 +98,7 @@
         android:background="@drawable/edit_bg"
         android:ems="10"
         android:gravity="fill_vertical"
-        android:hint="请输入货物大小"
+        android:hint="请输入货物大小  例：大/中/小"
         android:inputType="text"
         android:paddingLeft="10dp" />
 
@@ -111,7 +111,7 @@
         android:background="@drawable/edit_bg"
         android:ems="10"
         android:gravity="fill_vertical"
-        android:hint="请输入价格"
+        android:hint="请输入价格（单位：元） 例：10"
         android:inputType="text"
         android:paddingLeft="10dp" />
 

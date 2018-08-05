@@ -94,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
         String jsonStr = jsonObject.toString();
         RequestBody body = RequestBody.create(JSON, jsonStr);
         Request request = new Request.Builder()
-                .url("http://47.100.116.160:5000/user/email")
+                .url("http://47.100.116.160/user/email")
                 .post(body)
                 .build();
 
@@ -149,7 +149,7 @@ public class RegisterActivity extends AppCompatActivity {
         String jsonStr = jsonObject.toString();
         RequestBody body = RequestBody.create(JSON, jsonStr);
         Request request = new Request.Builder()
-                .url("http://47.100.116.160:5000/user/username")
+                .url("http://47.100.116.160/user/username")
                 .post(body)
                 .build();
 
@@ -208,7 +208,11 @@ public class RegisterActivity extends AppCompatActivity {
         } else if (isPassword(password)==false) {
             tv = (TextView) findViewById(R.id.tv);
             tv.setText("密码只能为6-16位字母数字组合");
-        } else {
+        } else if(username.length()>20){
+            tv = (TextView) findViewById(R.id.tv);
+            tv.setText("用户名不能过长");
+        }
+        else {
             postRegister(email,username,password,telephone);
         }
     }
@@ -222,7 +226,7 @@ public class RegisterActivity extends AppCompatActivity {
         return Pattern.matches(REGEX_USERNAME, username);
     }
     public static boolean isMobile(String mobile) {
-        String REGEX_MOBILE = "^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$";
+        String REGEX_MOBILE ="^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$";
         return Pattern.matches(REGEX_MOBILE, mobile);
     }
     public static boolean isEmail(String email) {
@@ -251,7 +255,7 @@ public class RegisterActivity extends AppCompatActivity {
         String jsonStr = jsonObject.toString();
         RequestBody body = RequestBody.create(JSON, jsonStr);
         Request request = new Request.Builder()
-                .url("http://47.100.116.160:5000/user/register")
+                .url("http://47.100.116.160/user/register")
                 .post(body)
                 .build();
 
@@ -267,7 +271,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
                     Looper.prepare();
-                    Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, "请查看邮件并验证，否则无法登录", Toast.LENGTH_LONG).show();
                     Looper.loop();
                 } else {
                     Looper.prepare();

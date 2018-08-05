@@ -46,7 +46,7 @@
         android:background="@drawable/button_shape2"
         android:text="历史记录"
         android:textColor="#ffffffff"
-        android:textSize="24sp"
+        android:textSize="20sp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="305dp" />
 

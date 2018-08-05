@@ -7,26 +7,28 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="@drawable/background5">
+    android:background="@drawable/background8">
 
     <TextView
         android:id="@+id/textView8d"
-        android:layout_width="368dp"
-        android:layout_height="444dp"
+        android:layout_width="340dp"
+        android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="TextView"
+        android:layout_marginTop="16dp"
+        android:background="#ffeb5100"
+        android:paddingLeft="10dp"
+        android:gravity="center"
         android:textColor="#ffffff"
-        android:textSize="24sp" />
+        android:textSize="22sp" />
 
     <Button
         android:id="@+id/btn_accept"
-        android:layout_width="141dp"
+        android:layout_width="140dp"
         android:layout_height="60dp"
         android:layout_alignTop="@id/textView2d"
-        android:layout_marginEnd="19dp"
-        android:layout_toStartOf="@id/textView2d"
-        android:background="@drawable/change_color_button_bw"
+        android:layout_toLeftOf="@id/textView2d"
+        android:background="@drawable/button_press3"
         android:gravity="center"
         android:text="接  受"
         android:textColor="#ffffffff"
@@ -34,12 +36,11 @@
 
     <Button
         android:id="@+id/btn_giveup"
-        android:layout_width="139dp"
+        android:layout_width="140dp"
         android:layout_height="60dp"
         android:layout_alignTop="@id/textView2d"
-        android:layout_marginStart="21dp"
-        android:layout_toEndOf="@+id/textView2d"
-        android:background="@drawable/change_color_button_bw"
+        android:layout_toRightOf="@+id/textView2d"
+        android:background="@drawable/button_press3"
         android:gravity="center"
         android:text="放  弃"
         android:textColor="#ffffffff"
@@ -47,9 +48,146 @@
 
     <TextView
         android:id="@+id/textView2d"
-        android:layout_width="10dp"
+        android:layout_width="20dp"
         android:layout_height="10dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="48dp" />
+
+    <TextView
+        android:id="@+id/textView9d"
+        android:layout_width="169dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/textView8d"
+        android:layout_toLeftOf="@id/textView20d"
+        android:background="@drawable/edge2"
+        android:gravity="center"
+        android:textColor="#e7e7e7"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView10d"
+        android:layout_width="169dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/textView8d"
+        android:layout_toRightOf="@id/textView20d"
+        android:background="@drawable/edge2"
+        android:gravity="center"
+        android:textColor="#e7e7e7"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView11d"
+        android:layout_width="340dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textView10d"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/edge"
+        android:paddingLeft="10dp"
+        android:gravity="center_vertical"
+        android:textSize="18sp"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/textView12d"
+        android:layout_width="340dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/textView14d"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/edge"
+        android:gravity="center_vertical"
+        android:textSize="18sp"
+        android:textColor="#e7e7e7" />
+
+    <TextView
+        android:id="@+id/textView13d"
+        android:layout_width="340dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/textView15d"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/edge"
+        android:gravity="center_vertical"
+        android:textSize="18sp"
+        android:textColor="#e7e7e7" />
+
+    <TextView
+        android:id="@+id/textView14d"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView8d"
+        android:layout_below="@+id/textView11d"
+        android:background="@drawable/edge2"
+        android:paddingLeft="10dp"
+        android:text="取件地址"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView15d"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView12d"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/edge2"
+        android:paddingLeft="10dp"
+        android:text="收货地址"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView16d"
+        android:layout_width="340dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="175dp"
+        android:paddingLeft="10dp"
+        android:textColor="#eb5100"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView17d"
+        android:layout_width="340dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/textView16d"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-175dp"
+        android:paddingLeft="10dp"
+        android:textColor="#eb5100"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView18d"
+        android:layout_width="340dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/textView17d"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="10dp"
+        android:textColor="#eb5100"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView19d"
+        android:layout_width="340dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/textView18d"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="10dp"
+        android:textColor="#eb5100"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView20d"
+        android:layout_width="2dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/textView8d"
+        android:layout_centerInParent="true"
+        android:background="@android:color/transparent" />
+
+    <TextView
+        android:id="@+id/textView21d"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/textView17d"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

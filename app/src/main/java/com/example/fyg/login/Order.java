@@ -69,7 +69,8 @@ public class Order {
         this.email=email;
     }
 
-    public static Order[] orders=new Order[1000];
+    public static Order[] orders = new Order[1000];
 
     public static int length;
+
 }

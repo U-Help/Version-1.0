@@ -6,4 +6,5 @@ public class User {
     public static String success;
     public static int num;
     public static boolean flag;
+    public static int denum;//
 }

@@ -1,7 +1,9 @@
 package com.example.fyg.login;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.os.Looper;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,7 +29,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class CurrentOrderActivity extends AppCompatActivity {
+public class CurrentOrderActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+    private SwipeRefreshLayout mSwipeLayout;
     private ListView mListView;
     private ArrayList<String> list = new ArrayList<String>();
     private ArrayAdapter<String> adapter;
@@ -45,33 +48,72 @@ public class CurrentOrderActivity extends AppCompatActivity {
          */
         adapter = new ArrayAdapter<String>(this,R.layout.list_item1, getData());
         mListView.setAdapter(adapter);
+        mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container1);
+
+
+        //绑定刷新时间
+        mSwipeLayout.setOnRefreshListener(this);
+        //设置颜色
+        mSwipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light, android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Proposer proposer=new Proposer();
-                if(i==0||i==proposer.length+1){
+                Accepter accepter=new Accepter();
+                if(proposer.length==0&&accepter.length==0);
+                else if(i<proposer.length) {
+                    if(proposer.proposers[i].express_state==1) {
+                        proposer.num=i;
+                        postReInfo1(i);
+                        startActivity(new Intent(CurrentOrderActivity.this, ProposalActivity.class));
+                    }
+                    else if(proposer.proposers[i].express_state==0){
+                        proposer.num=i;
+                        postReInfo2(i);
+                        startActivity(new Intent(CurrentOrderActivity.this, ProposalActivity.class));
+                    }
+                    else;
                 }
                 else{
-                    if(i<=proposer.length) {
-                        if(proposer.proposers[i-1].express_state==1) {
-                            proposer.num=i-1;
-                            postReInfo(i - 1);
-                            startActivity(new Intent(CurrentOrderActivity.this, ProposalActivity.class));
-                        }
-                        else if(proposer.proposers[i-1].express_state==0){
-                            proposer.num=i-1;
-                            postReInfo(i - 1);
-                            startActivity(new Intent(CurrentOrderActivity.this, ProposalActivity.class));
-                        }
-                        else;
-                    }
-                    else{
-                        Accepter accepter=new Accepter();
-                        accepter.num=i-proposer.length-2;
-                        postGeInfo(i-proposer.length-2);
-                        startActivity(new Intent(CurrentOrderActivity.this, AccepterActivity.class));
-                    }
+                    accepter.num=i-proposer.length;
+                    postGeInfo(i-proposer.length);
+                    startActivity(new Intent(CurrentOrderActivity.this, AccepterActivity.class));
                 }
+            }
+        });
+    }
+
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //停止刷新
+                mSwipeLayout.setRefreshing(false);
+
+            }
+        }, 3000);
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                //获取数据
+                list.clear();
+                postProposal();
+                //postAccepter();
+                //getData();
+                mSwipeLayout.setRefreshing(false);
+            }
+        });
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                //获取数据
+                list.clear();
+                //postProposal();
+                postAccepter();
+                getData();
+                mSwipeLayout.setRefreshing(false);
             }
         });
     }
@@ -87,44 +129,41 @@ public class CurrentOrderActivity extends AppCompatActivity {
             return list;
         }
         if(proposer.length!=0&&accepter.length==0) {
-            list.add("收货    是否有人接单     接单人   收货时间");
             for (i = 0; i < proposer.length; i++) {
                 if(proposer.proposers[i].express_state==1)
-                    list.add(i + 1 + ".    是" + "     " + proposer.proposers[i].user + "     " + proposer.proposers[i].rece_time);
+                    list.add("收货："+Integer.toString(i + 1)+ "\n\n接单状态：已被接单" + "\n接单人：" + proposer.proposers[i].user + "\n收货时间：\n    " + proposer.proposers[i].rece_time+"\n\n\n");
                 else
-                    list.add(i + 1 + ".    否");
+                    list.add("收货："+Integer.toString(i + 1) + "\n\n接单状态：未被接单"+"\n\n\n");
             }
             mListView.setAdapter(adapter);
             return list;
         }
         else if(proposer.length==0&&accepter.length!=0){
-            list.add("取货    收货人   收货时间   取货地点   收货地点");
             for (i = 0; i < accepter.length; i++) {
-                list.add(i + 1 + ".    " + accepter.accepters[i].user + "     " + accepter.accepters[i].rece_time + "     " + accepter.accepters[i].srcplace+"     "+accepter.accepters[i].dstplace);
+                list.add("取货："+Integer.toString(i + 1)+ "\n\n收货人：" + accepter.accepters[i].user + "\n收货时间：\n    " + accepter.accepters[i].srcplace+"\n收货地点：\n    "+accepter.accepters[i].dstplace+"\n\n\n");
             }
             mListView.setAdapter(adapter);
             return list;
         }
         else{
-            list.add("收货    是否有人接单     接单人   收货时间");
             for (i = 0; i < proposer.length; i++) {
                 if(proposer.proposers[i].express_state==1)
-                    list.add(i + 1 + ".    是" + "     " + proposer.proposers[i].user + "     " + proposer.proposers[i].rece_time);
+                    list.add("收货："+Integer.toString(i + 1) + "\n\n接单状态：已被接单" + "\n接单人：" + proposer.proposers[i].user + "\n收货时间：\n    " + proposer.proposers[i].rece_time+"\n\n\n");
                 else
-                    list.add(i + 1 + ".    否");
+                    list.add("收货："+Integer.toString(i+ 1) + "\n\n接单状态：未被接单"+"\n\n\n");
             }
-            list.add("取货    收货人   收货时间   取货地点   收货地点");
             for (i=0; i < accepter.length; i++) {
-                list.add(i  +1+ ".    " + accepter.accepters[i].user + "     " + accepter.accepters[i].rece_time + "     " + accepter.accepters[i].srcplace+"     "+accepter.accepters[i].dstplace);
+                list.add("取货："+Integer.toString(i  +1)+ "\n\n收货人：" + accepter.accepters[i].user + "\n收货时间：\n    " + accepter.accepters[i].rece_time +"\n收货地点：\n    "+accepter.accepters[i].dstplace+"\n\n\n");
             }
             mListView.setAdapter(adapter);
             return list;
         }
     }
 
-    public void postReInfo(int j){
+    public void postReInfo1(int j){
         OkHttpClient client = new OkHttpClient();
         User user=new User();
+        //user.denum=j;
         Proposer proposer=new Proposer();
         int i=user.id;
         String id=Integer.toString(i);
@@ -139,7 +178,7 @@ public class CurrentOrderActivity extends AppCompatActivity {
         String jsonStr = jsonObject.toString();
         RequestBody body = RequestBody.create(JSON, jsonStr);
         Request request = new Request.Builder()
-                .url("http://47.100.116.160:5000/item/proposer_user2")
+                .url("http://47.100.116.160/item/proposer_user2")
                 .post(body)
                 .build();
 
@@ -206,10 +245,94 @@ public class CurrentOrderActivity extends AppCompatActivity {
         });
     }
 
+    public void postReInfo2(int j){
+        OkHttpClient client = new OkHttpClient();
+        User user=new User();
+        //user.denum=j;
+        Proposer proposer=new Proposer();
+        int i=user.id;
+        String id=Integer.toString(i);
+        String token=user.token;
+        String item_id=proposer.proposers[j].item_id;
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("item_id",item_id);
+        map.put("id", id);
+        map.put("token", token);
+        JSONObject jsonObject = new JSONObject(map);
+        String jsonStr = jsonObject.toString();
+        RequestBody body = RequestBody.create(JSON, jsonStr);
+        Request request = new Request.Builder()
+                .url("http://47.100.116.160/item/proposer_user3")
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Looper.prepare();
+                Looper.loop();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    boolean flag = false;
+                    try {
+                        String str = response.body().string();
+
+                        JSONObject jsonStr = new JSONObject(str);
+                        JSONObject jsonObject1=jsonStr.getJSONObject("data");
+                        if (jsonStr.getString("state").equals("success")) {
+                            flag = true;
+                            Proposer proposer1=new Proposer();
+                            int j=proposer1.num;
+                            proposer1.proposers[j].setDstplace(jsonObject1.getString("dstplace"));
+                            //System.out.println(proposer1.proposers[j].dstplace);
+                            proposer1.proposers[j].setSrcplace(jsonObject1.getString("srcplace"));
+                            //System.out.println(proposer1.proposers[j].srcplace);
+                            //System.out.println(proposer1.proposers[j].user);
+                            proposer1.proposers[j].setRece_time(jsonObject1.getString("rece_time"));
+                            //System.out.println(proposer1.proposers[j].rece_time);
+                            //System.out.println(proposer1.proposers[j].rephone);
+                            proposer1.proposers[j].setPrice(jsonObject1.getString("price"));
+                            //System.out.println(proposer1.proposers[j].price);
+                            proposer1.proposers[j].setSize(jsonObject1.getString("size"));
+                            //System.out.println(proposer1.proposers[j].size);
+                            proposer1.proposers[j].setRev_password(jsonObject1.getString("rev_password"));
+                            //System.out.println(proposer1.proposers[j].rev_password);
+                            proposer1.proposers[j].setMsg(jsonObject1.getString("msg"));
+                            //System.out.println(proposer1.proposers[j].msg);
+                            proposer1.proposers[j].setItem_id(jsonObject1.getString("item_id"));
+                            //System.out.println(proposer1.proposers[j].item_id);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    if (flag) {
+                        Looper.prepare();
+                        //Toast.makeText(GetActivity.this, "获取订单成功", Toast.LENGTH_LONG).show();
+                        Looper.loop();
+                    } else {
+                        Looper.prepare();
+                        //Toast.makeText(GetActivity.this, "获取订单失败", Toast.LENGTH_LONG).show();
+                        Looper.loop();
+                    }
+                } else {
+                    Looper.prepare();
+                    //Toast.makeText(GetActivity.this, "服务器未响应" + response.body().string(), Toast.LENGTH_LONG).show();
+                    Looper.loop();
+                }
+            }
+        });
+    }
+
     public void postGeInfo(int j){
         System.out.println(j);
         OkHttpClient client = new OkHttpClient();
         User user=new User();
+        //user.denum=j;
         final Accepter accepter=new Accepter();
         int i=user.id;
         String id=Integer.toString(i);
@@ -224,7 +347,7 @@ public class CurrentOrderActivity extends AppCompatActivity {
         String jsonStr = jsonObject.toString();
         RequestBody body = RequestBody.create(JSON, jsonStr);
         Request request = new Request.Builder()
-                .url("http://47.100.116.160:5000/item/accepter_user2")
+                .url("http://47.100.116.160/item/accepter_user2")
                 .post(body)
                 .build();
 
@@ -277,6 +400,170 @@ public class CurrentOrderActivity extends AppCompatActivity {
                     Looper.prepare();
                     //Toast.makeText(GetActivity.this, "服务器未响应" + response.body().string(), Toast.LENGTH_LONG).show();
                     Looper.loop();
+                }
+            }
+        });
+    }
+
+    public void postProposal(){
+        OkHttpClient client = new OkHttpClient();
+        User user=new User();
+        int i=user.id;
+        String id=Integer.toString(i);
+        String token=user.token;
+
+        HashMap<String, String> map = new HashMap<>();
+        //map.put("offset","0");
+        map.put("id", id);
+        map.put("token", token);
+        JSONObject jsonObject = new JSONObject(map);
+        String jsonStr = jsonObject.toString();
+        RequestBody body = RequestBody.create(JSON, jsonStr);
+        Request request = new Request.Builder()
+                .url("http://47.100.116.160/item/proposer_user")
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Looper.prepare();
+                Looper.loop();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                int i;
+                if (response.isSuccessful()) {
+                    boolean flag = false;
+                    try {
+                        String str = response.body().string();
+
+                        JSONObject jsonObject = new JSONObject(str);
+                        String state = jsonObject.getString("state");
+
+                        if (state.equals("success")) {
+                            flag = true;
+                            Proposer proposer = new Proposer();
+                            proposer.length = 0;
+                            JSONArray jsonArray = jsonObject.getJSONArray("data");
+                            for (i = 0; i < jsonArray.length(); i++) {
+                                Proposer s = new Proposer();
+                                JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
+                                s.setExpress_state(jsonObject1.getInt("express_state"));
+                                //System.out.println(s.express_state);
+                                s.setRece_time(jsonObject1.getString("rece_time"));
+                                //System.out.println(s.rece_time);
+                                s.setItem_id(jsonObject1.getString("item_id"));
+                                //System.out.println(s.item_id);
+                                if (s.express_state==1) {
+                                    s.setUser(jsonObject1.getString("username"));
+                                    System.out.println(s.user);
+                                    //System.out.println(s.user);
+                                }
+                                /*s.setPrice(jsonObject1.getString("price"));
+                                //System.out.println(s.price);
+                                s.setProp_time(jsonObject1.getString("prop_time"));
+                                //System.out.println(s.prop_time);
+                                s.setRece_time(jsonObject1.getString("rece_time"));
+                                //System.out.println(s.rece_time);
+                                s.setRev_password(jsonObject1.getString("rev_password"));
+                                //System.out.println(s.rev_password);
+                                s.setSize(jsonObject1.getString("size"));
+                                //System.out.println(s.size);
+                                s.setSrcplace(jsonObject1.getString("srcplace"));
+                                //System.out.println(s.srcplace);
+                                s.setUsername(jsonObject1.getString("username"));
+                                s.setMsg(jsonObject1.getString("msg"));
+                                s.setEmail(jsonObject1.getString("email"));*/
+                                proposer.proposers[i] = s;
+                                proposer.length = i + 1;
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
+    public void postAccepter(){
+        OkHttpClient client = new OkHttpClient();
+        User user=new User();
+        int i=user.id;
+        String id=Integer.toString(i);
+        String token=user.token;
+
+        HashMap<String, String> map = new HashMap<>();
+        //map.put("offset","0");
+        map.put("id", id);
+        map.put("token", token);
+        JSONObject jsonObject = new JSONObject(map);
+        String jsonStr = jsonObject.toString();
+        RequestBody body = RequestBody.create(JSON, jsonStr);
+        Request request = new Request.Builder()
+                .url("http://47.100.116.160/item/accepter_user")
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Looper.prepare();
+                Looper.loop();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                int i;
+                if (response.isSuccessful()) {
+                    boolean flag = false;
+                    try {
+                        String str = response.body().string();
+
+                        JSONObject jsonObject = new JSONObject(str);
+                        String state=jsonObject.getString("state");
+
+                        if (state.equals("success")) {
+                            flag=true;
+                            Accepter accepter=new Accepter();
+                            accepter.length=0;
+                            JSONArray jsonArray=jsonObject.getJSONArray("data");
+                            for(i = 0;i < jsonArray.length();i++){
+                                Accepter s=new Accepter();
+                                JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
+                                s.setUser(jsonObject1.getString("username"));
+                                //System.out.println(s.user);
+                                s.setRece_time(jsonObject1.getString("rece_time"));
+                                //System.out.println(s.rece_time);
+                                s.setItem_id(jsonObject1.getString("item_id"));
+                                //System.out.println(s.item_id);
+                                s.setSrcplace(jsonObject1.getString("srcplace"));
+                                //System.out.println(s.srcplace);
+                                s.setDstplace(jsonObject1.getString("dstplace"));
+                                //System.out.println(s.dstplace);
+                                /*s.setProp_time(jsonObject1.getString("prop_time"));
+                                //System.out.println(s.prop_time);
+                                s.setRece_time(jsonObject1.getString("rece_time"));
+                                //System.out.println(s.rece_time);
+                                s.setRev_password(jsonObject1.getString("rev_password"));
+                                //System.out.println(s.rev_password);
+                                s.setSize(jsonObject1.getString("size"));
+                                //System.out.println(s.size);
+                                s.setSrcplace(jsonObject1.getString("srcplace"));
+                                //System.out.println(s.srcplace);
+                                s.setUsername(jsonObject1.getString("username"));
+                                s.setMsg(jsonObject1.getString("msg"));
+                                s.setEmail(jsonObject1.getString("email"));*/
+                                accepter.accepters[i]=s;
+                                accepter.length=i+1;
+                            }
+                            //System.out.println(proposer.length);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });

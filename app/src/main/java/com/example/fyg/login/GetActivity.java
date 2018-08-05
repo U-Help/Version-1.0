@@ -168,7 +168,7 @@ public class GetActivity extends AppCompatActivity implements NavigationView.OnN
         String jsonStr = jsonObject.toString();
         RequestBody body = RequestBody.create(JSON, jsonStr);
         Request request = new Request.Builder()
-                .url("http://47.100.116.160:5000/item/hall")
+                .url("http://47.100.116.160/item/hall")
                 .post(body)
                 .build();
 
@@ -263,7 +263,7 @@ public class GetActivity extends AppCompatActivity implements NavigationView.OnN
         String jsonStr = jsonObject.toString();
         RequestBody body = RequestBody.create(JSON, jsonStr);
         Request request = new Request.Builder()
-                .url("http://47.100.116.160:5000/item/proposer_user")
+                .url("http://47.100.116.160/item/proposer_user")
                 .post(body)
                 .build();
 
@@ -301,7 +301,7 @@ public class GetActivity extends AppCompatActivity implements NavigationView.OnN
                                 //System.out.println(s.item_id);
                                 if (s.express_state==1) {
                                     s.setUser(jsonObject1.getString("username"));
-                                    System.out.println(s.user);
+                                    //System.out.println(s.user);
                                     //System.out.println(s.user);
                                 }
                                 /*s.setPrice(jsonObject1.getString("price"));
@@ -346,7 +346,7 @@ public class GetActivity extends AppCompatActivity implements NavigationView.OnN
         String jsonStr = jsonObject.toString();
         RequestBody body = RequestBody.create(JSON, jsonStr);
         Request request = new Request.Builder()
-                .url("http://47.100.116.160:5000/item/accepter_user")
+                .url("http://47.100.116.160/item/accepter_user")
                 .post(body)
                 .build();
 
@@ -380,12 +380,12 @@ public class GetActivity extends AppCompatActivity implements NavigationView.OnN
                                 //System.out.println(s.user);
                                 s.setRece_time(jsonObject1.getString("rece_time"));
                                 //System.out.println(s.rece_time);
-                                s.setItem_id(jsonObject1.getString("item_id"));
-                                //System.out.println(s.item_id);
                                 s.setSrcplace(jsonObject1.getString("srcplace"));
                                 //System.out.println(s.srcplace);
                                 s.setDstplace(jsonObject1.getString("dstplace"));
                                 //System.out.println(s.dstplace);
+                                s.setItem_id(jsonObject1.getString("item_id"));
+                                //System.out.println(s.item_id);
                                 /*s.setProp_time(jsonObject1.getString("prop_time"));
                                 //System.out.println(s.prop_time);
                                 s.setRece_time(jsonObject1.getString("rece_time"));

@@ -68,11 +68,10 @@
         android:id="@+id/btnSetting"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="13dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/editPassword"
         android:background="@drawable/button_shape2"
-        android:text="设    置"
+        android:text="找回密码"
         android:textColor="#ffffffff" />
 
     <TextView

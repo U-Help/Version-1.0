@@ -35,46 +35,10 @@
 
 
     <Button
-        android:id="@+id/btnTongxunlu"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/btnHelp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/change_color_button2"
-        android:gravity="center"
-        android:text="通信录绑定"
-        android:textColor="#ffffffff"
-        android:textSize="20dp" />
-
-    <Button
-        android:id="@+id/btngongzhonghao"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/btnTongxunlu"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/change_color_button2"
-        android:gravity="center"
-        android:text="公众号绑定"
-        android:textColor="#ffffffff"
-        android:textSize="20dp" />
-
-    <Button
-        android:id="@+id/btnPasser"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/btngongzhonghao"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/change_color_button2"
-        android:gravity="center"
-        android:text="快递员模式"
-        android:textColor="#ffffffff"
-        android:textSize="20dp" />
-
-    <Button
         android:id="@+id/btnAddress"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/btnPasser"
+        android:layout_below="@+id/btnHelp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/change_color_button2"
         android:gravity="center"

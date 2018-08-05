@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ProposalActivity">
 
-</LinearLayout>
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="24dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="#9feb5100" />
+
+    <TextView
+        android:id="@+id/src"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:textSize="24dp"
+        android:layout_below="@+id/date"
+        android:background="#9f424242" />
+
+    <TextView
+        android:id="@+id/dst"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:textSize="24dp"
+        android:layout_below="@+id/src"
+        android:background="#9f424242" />
+
+    <TextView
+        android:id="@+id/textView9item"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_below="@+id/dst"
+        android:layout_centerHorizontal="true"
+        android:background="#ffffff"
+        android:text="TextView" />
+</RelativeLayout>

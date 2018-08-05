@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONObject;
@@ -25,6 +26,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.lang.String;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 
 import okhttp3.Call;
@@ -42,6 +44,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
     private TextInputEditText a3;
     private Button btn_Submit;
     private Button btn_Delete;
+    public boolean flag;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     @Override
@@ -56,7 +59,11 @@ public class ChangePasswordActivity extends AppCompatActivity {
         btn_Submit= findViewById(R.id.btn_Submit);
         btn_Submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                submit();
+                judge();
+                if(flag==true) {
+                    submit();
+                }
+                finish();
             }
         });
         btn_Delete= findViewById(R.id.btn_Delete);
@@ -66,6 +73,25 @@ public class ChangePasswordActivity extends AppCompatActivity {
             }
         });
         initView();
+    }
+
+    public void judge() {
+        String password1=a2.getText().toString();
+        String password2=a3.getText().toString();
+        flag=false;
+         if (isPassword(password1)==false) {
+             Toast.makeText(ChangePasswordActivity.this, "密码只能为6-16位字母数字组合", Toast.LENGTH_LONG).show();
+        } else if (isPassword(password2)==false) {
+             Toast.makeText(ChangePasswordActivity.this, "密码只能为6-16位字母数字组合", Toast.LENGTH_LONG).show();
+        }
+        else{
+            flag=true;
+        }
+    }
+
+    public static boolean isPassword(String password) {
+        String REGEX_PASSWORD = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$";
+        return Pattern.matches(REGEX_PASSWORD, password);
     }
 
     private void initView(){
@@ -100,7 +126,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         String jsonStr = jsonObject.toString();
         RequestBody body = RequestBody.create(JSON, jsonStr);
         Request request = new Request.Builder()
-                .url("http://47.100.116.160:5000/user/reset1")
+                .url("http://47.100.116.160/user/reset1")
                 .post(body)
                 .build();
 
@@ -142,7 +168,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     }
                 } else {
                     Looper.prepare();
-                    Toast.makeText(ChangePasswordActivity.this, "Reset Response Failed " + response.body().string(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(ChangePasswordActivity.this, "失败" , Toast.LENGTH_LONG).show();
                     Looper.loop();
                 }
             }
@@ -177,7 +203,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
             String jsonStr = jsonObject.toString();
             RequestBody body = RequestBody.create(JSON, jsonStr);
             Request request = new Request.Builder()
-                    .url("http://47.100.116.160:5000/user/reset2")
+                    .url("http://47.100.116.160/user/reset2")
                     .post(body)
                     .build();
 
@@ -185,7 +211,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     Looper.prepare();
-                    Toast.makeText(ChangePasswordActivity.this, "Reset Failed", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ChangePasswordActivity.this, "失败" , Toast.LENGTH_LONG).show();
                     Looper.loop();
                 }
 
@@ -207,18 +233,18 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
                         if (flag) {
                             Looper.prepare();
-                            Toast.makeText(ChangePasswordActivity.this, "Reset Successfully", Toast.LENGTH_LONG).show();
+                            Toast.makeText(ChangePasswordActivity.this, "成功", Toast.LENGTH_LONG).show();
                             finish();
                             Looper.loop();
                         } else {
                             Looper.prepare();
-                            Toast.makeText(ChangePasswordActivity.this, "Reset Failure", Toast.LENGTH_LONG).show();
+                            Toast.makeText(ChangePasswordActivity.this, "失败" , Toast.LENGTH_LONG).show();
                             a1.setText("");
                             Looper.loop();
                         }
                     } else {
                         Looper.prepare();
-                        Toast.makeText(ChangePasswordActivity.this, "Reset Response Failed " + response.body().string(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(ChangePasswordActivity.this, "失败" , Toast.LENGTH_LONG).show();
                         Looper.loop();
                     }
                 }

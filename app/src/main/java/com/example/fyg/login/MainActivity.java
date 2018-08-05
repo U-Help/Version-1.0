@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                postLogin();
+                    postLogin();
             }
         });
 
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         btnSetting = findViewById(R.id.btnSetting);
         btnSetting.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,GetActivity.class));
+                startActivity(new Intent(MainActivity.this,ForgetPasswordActivity.class));
             }
         });
     }
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         String jsonStr = jsonObject.toString();
         RequestBody body = RequestBody.create(JSON, jsonStr);
         Request request = new Request.Builder()
-                .url("http://47.100.116.160:5000/user/login")
+                .url("http://47.100.116.160/user/login")
                 .post(body)
                 .build();
 
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 Looper.prepare();
-                Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "登录失败，请检查用户名密码以及是否通过邮箱验证", Toast.LENGTH_LONG).show();
                 Looper.loop();
             }
 
@@ -108,18 +108,18 @@ public class MainActivity extends AppCompatActivity {
 
                     if (flag) {
                         Looper.prepare();
-                        Toast.makeText(MainActivity.this, "Login Successfully", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "登录成功", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(MainActivity.this, GetActivity.class);
                         startActivity(intent);
                         Looper.loop();
                     } else {
                         Looper.prepare();
-                        Toast.makeText(MainActivity.this, "Login Failure", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "登录失败，请检查用户名密码以及是否通过邮箱验证", Toast.LENGTH_LONG).show();
                         Looper.loop();
                     }
                 } else {
                     Looper.prepare();
-                    Toast.makeText(MainActivity.this, "Login Response Failed " + response.body().string(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "登录失败，请检查用户名密码以及是否通过邮箱验证", Toast.LENGTH_LONG).show();
                     Looper.loop();
                 }
             }

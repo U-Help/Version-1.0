@@ -27,13 +27,27 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import java.util.*;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.List;
+
+
+
+
 
 public class HelpGetActivity extends Activity implements SwipeRefreshLayout.OnRefreshListener {
     private SwipeRefreshLayout mSwipeLayout;
     private ListView mListView;
-    private ArrayList<String> list = new ArrayList<String>();
+    //private ArrayList<String> list = new ArrayList<String>();
     private ArrayAdapter<String> adapter;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    private List<HelpObj> helpList = new ArrayList<HelpObj>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +59,13 @@ public class HelpGetActivity extends Activity implements SwipeRefreshLayout.OnRe
         /**
          * listview绑定adapter
          */
-        adapter = new ArrayAdapter<String>(this, R.layout.list_item1, getData());
+        adapter = new HelpObjAdapter(this, R.layout.help_obj, initList());
+
         mListView.setAdapter(adapter);
 
         mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+
+
         //绑定刷新时间
         mSwipeLayout.setOnRefreshListener(this);
         //设置颜色
@@ -58,25 +75,32 @@ public class HelpGetActivity extends Activity implements SwipeRefreshLayout.OnRe
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    User user=new User();
-                    user.num=i;
-                    Toast.makeText(HelpGetActivity.this, i+1 + "被单击了", Toast.LENGTH_LONG).show();
+                User user=new User();
+                Order order=new Order();
+                user.num=i;
+                if(order.length==0){
+                    ;
+                }
+                else {//Toast.makeText(HelpGetActivity.this, i+1 + "被单击了", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(HelpGetActivity.this, DetailActivity.class));
+                }
             }
         });
     }
 
-    private ArrayList<String> getData() {
+    private List<HelpObj> initList() {
         Order order=new Order();
         //System.out.println(order.length);
         if(order.length==0) {
-            list.add("暂时无订单");
-            return list;
+            HelpObj obj = new HelpObj("暂时无订单", "", "");
+            helpList.add(obj);
+            return helpList;
         }
         for(int i=1;i<order.length+1;i++){
-            list.add("项目 "+i+"\n"+"收货时间"+order.orders[i-1].rece_time+"\n"+"取货点"+order.orders[i-1].srcplace+"\n"+"送达点"+order.orders[i-1].dstplace+"\n\n");
+            HelpObj obj = new HelpObj(order.orders[i-1].rece_time, order.orders[i-1].srcplace, order.orders[i-1].dstplace);
+            helpList.add(obj);
         }
-        return list;
+        return helpList;
     }
 
     public void onRefresh() {
@@ -89,28 +113,32 @@ public class HelpGetActivity extends Activity implements SwipeRefreshLayout.OnRe
             }
         }, 3000);
         new Handler().post(new Runnable() {
-           @Override
-           public void run() {
-               //获取数据
-               refreshData();
-               refreshData();
-               mSwipeLayout.setRefreshing(false);
-           }
+            @Override
+            public void run() {
+                //获取数据
+                refreshData();
+                refreshData();
+                mSwipeLayout.setRefreshing(false);
+            }
         });
     }
 
     private void refreshData() {
         Order order=new Order();
         getInfo();
-        list.clear();
+        helpList.clear();
         if(order.length==0){
-            list.add("暂时无订单");
+            HelpObj obj = new HelpObj("暂时无订单", "", "");
+            helpList.add(obj);
+            HelpObjAdapter adapter = new HelpObjAdapter(this, R.layout.help_obj, helpList);
             mListView.setAdapter(adapter);
             return;
         }
         for(int i=1;i<order.length+1;i++){
-            list.add("项目 "+i+"\n"+"收货时间"+order.orders[i-1].rece_time+"\n"+"取货点"+order.orders[i-1].srcplace+"\n"+"送达点"+order.orders[i-1].dstplace+"\n\n");
+            HelpObj obj = new HelpObj(order.orders[i-1].rece_time, order.orders[i-1].srcplace, order.orders[i-1].dstplace);
+            helpList.add(obj);
         }
+        HelpObjAdapter adapter = new HelpObjAdapter(this, R.layout.help_obj, helpList);
         mListView.setAdapter(adapter);
         /*list.add(0, String.valueOf((int) (Math.random() * 10)));
         adapter.notifyDataSetChanged();*/
@@ -131,7 +159,7 @@ public class HelpGetActivity extends Activity implements SwipeRefreshLayout.OnRe
         String jsonStr = jsonObject.toString();
         RequestBody body = RequestBody.create(JSON, jsonStr);
         Request request = new Request.Builder()
-                .url("http://47.100.116.160:5000/item/hall")
+                .url("http://47.100.116.160/item/hall")
                 .post(body)
                 .build();
 
@@ -216,3 +244,4 @@ public class HelpGetActivity extends Activity implements SwipeRefreshLayout.OnRe
         super.onDestroy();
     }
 }
+

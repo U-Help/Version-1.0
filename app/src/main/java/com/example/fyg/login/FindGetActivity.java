@@ -139,7 +139,7 @@ public class FindGetActivity extends AppCompatActivity {
             String jsonStr = jsonObject.toString();
             RequestBody body = RequestBody.create(JSON, jsonStr);
             Request request = new Request.Builder()
-                    .url("http://47.100.116.160:5000/item/propose")
+                    .url("http://47.100.116.160/item/propose")
                     .post(body)
                     .build();
         client.newCall(request).enqueue(new Callback() {

@@ -4,35 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background3"
+    android:background="@drawable/background5"
     tools:context=".AccepterActivity">
 
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="374dp"
-        android:layout_height="449dp"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_container4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:text="TextView"
-        android:textSize="24sp"/>
+        android:layout_alignParentTop="true">
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="374dp"
+            android:layout_height="449dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="TextView"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textView3hd"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="100dp" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <Button
         android:id="@+id/btnD1"
         android:layout_width="150dp"
         android:layout_height="60dp"
-        android:layout_below="@+id/textView3hd"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-100dp"
-        android:background="@drawable/change_color_button_red"
-        android:text="取消订单"
-        android:textColor="#ffffff"
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/textView3hd"
-        android:layout_width="20dp"
-        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="100dp" />
+        android:layout_marginBottom="34dp"
+        android:background="@drawable/change_color_button_red"
+        android:text="放弃订单"
+        android:textColor="#ffffff"
+        android:textSize="24sp" />
 </RelativeLayout>
