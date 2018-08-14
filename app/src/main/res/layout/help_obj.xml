@@ -9,36 +9,47 @@
 
     <TextView
         android:id="@+id/date"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="50dp"
-        android:textSize="24dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:background="#9feb5100" />
+        android:background="#ef4775b4"
+        android:textSize="24dp"
+        android:textColor="#c7c7c7"
+        android:paddingLeft="10dp"
+        android:gravity="center_vertical"/>
 
     <TextView
         android:id="@+id/src"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="80dp"
-        android:textSize="24dp"
         android:layout_below="@+id/date"
-        android:background="#9f424242" />
+        android:layout_centerHorizontal="true"
+        android:background="#9f424242"
+        android:textSize="24dp"
+        android:paddingLeft="15dp"
+        android:gravity="center_vertical"
+        android:textColor="#ffb7b7b7" />
 
     <TextView
         android:id="@+id/dst"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="80dp"
-        android:textSize="24dp"
-        android:layout_below="@+id/src"
-        android:background="#9f424242" />
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:background="#9f424242"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:textColor="#ffb7b7b7"
+        android:textSize="24dp" />
 
     <TextView
-        android:id="@+id/textView9item"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:layout_below="@+id/dst"
-        android:layout_centerHorizontal="true"
-        android:background="#ffffff"
-        android:text="TextView" />
+        android:id="@+id/textView2"
+        android:layout_width="300dp"
+        android:layout_height="1dp"
+        android:layout_below="@+id/src"
+        android:background="#000000"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

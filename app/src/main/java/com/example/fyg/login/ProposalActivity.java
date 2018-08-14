@@ -93,7 +93,6 @@ public class ProposalActivity extends AppCompatActivity implements SwipeRefreshL
         String price=proposer.proposers[num].price;
         String size=proposer.proposers[num].size;
         String rev_password=proposer.proposers[num].rev_password;
-        String msg=proposer.proposers[num].msg;
         TextView text = (TextView) this.findViewById(R.id.textView3);
         String str = "接单者：" +username+"\n"+
                 "接单者电话：" +phone+"\n"+
@@ -115,7 +114,6 @@ public class ProposalActivity extends AppCompatActivity implements SwipeRefreshL
         String price=proposer.proposers[num].price;
         String size=proposer.proposers[num].size;
         String rev_password=proposer.proposers[num].rev_password;
-        String msg=proposer.proposers[num].msg;
         TextView text = (TextView) this.findViewById(R.id.textView3);
         String str =
                 "取货地点：" +srcplace+"\n"+

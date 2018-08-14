@@ -1,7 +1,9 @@
 package com.example.fyg.login;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Looper;
 import android.widget.Button;
@@ -49,6 +51,7 @@ public class FindGetActivity extends AppCompatActivity {
     private EditText editPrice;
     private EditText editAddress;
     private TextView tv;
+    private SharedPreferences sp;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     @Override
@@ -57,6 +60,7 @@ public class FindGetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_find_get);
         _CollectorActivity.addActivity(this);
 
+        sp=this.getSharedPreferences("userAddr", Context.MODE_PRIVATE);
         btnCancel = findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -77,6 +81,9 @@ public class FindGetActivity extends AppCompatActivity {
         editSize = findViewById(R.id.editSize);
         editPrice = findViewById(R.id.editPrice);
         editDstPlace = findViewById(R.id.editDstplace);
+        if(sp.getString("state","").equals("1")){
+            editAddress.setText(sp.getString("ADDR", ""));
+        }
         // 获取界面布局文件中的Spinner组件
         /*mSpinner = (Spinner) findViewById(R.id.spin);
 

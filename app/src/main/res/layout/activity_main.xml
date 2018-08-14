@@ -80,4 +80,22 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/editUsername"
         android:layout_centerHorizontal="true" />
+
+    <CheckBox
+        android:id="@+id/rem_pw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnSetting"
+        android:layout_alignStart="@+id/editUsername"
+        android:text="记住密码"
+        android:textColor="#ffffff"/>
+
+    <CheckBox
+        android:id="@+id/auto_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnSetting"
+        android:layout_alignStart="@+id/btnRegister"
+        android:text="自动登录"
+        android:textColor="#ffffff"/>
 </RelativeLayout>

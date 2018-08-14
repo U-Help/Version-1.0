@@ -128,16 +128,16 @@ public class CurrentOrderActivity extends AppCompatActivity implements SwipeRefr
         if(proposer.length!=0&&accepter.length==0) {
             for (i = 0; i < proposer.length; i++) {
                 if(proposer.proposers[i].express_state==1)
-                    list.add("收货："+Integer.toString(i + 1)+ "\n\n接单状态：已被接单" + "\n接单人：" + proposer.proposers[i].user + "\n收货时间：\n    " + proposer.proposers[i].rece_time+"\n\n\n");
+                    list.add("收货"+ "\n\n接单状态：已被接单"  + "\n收货时间：" + proposer.proposers[i].rece_time+"\n\n");
                 else
-                    list.add("收货："+Integer.toString(i + 1) + "\n\n接单状态：未被接单"+"\n\n\n");
+                    list.add("收货"+ "\n\n接单状态：未被接单"+"\n\n");
             }
             mListView.setAdapter(adapter);
             return list;
         }
         else if(proposer.length==0&&accepter.length!=0){
             for (i = 0; i < accepter.length; i++) {
-                list.add("取货："+Integer.toString(i + 1)+ "\n\n收货人：" + accepter.accepters[i].user + "\n收货时间：\n    " + accepter.accepters[i].srcplace+"\n收货地点：\n    "+accepter.accepters[i].dstplace+"\n\n\n");
+                list.add("取货"+ "\n\n收货时间：" + accepter.accepters[i].rece_time+"\n取货地点："+accepter.accepters[i].srcplace+"\n收货地点："+accepter.accepters[i].dstplace+"\n\n");
             }
             mListView.setAdapter(adapter);
             return list;
@@ -145,12 +145,12 @@ public class CurrentOrderActivity extends AppCompatActivity implements SwipeRefr
         else{
             for (i = 0; i < proposer.length; i++) {
                 if(proposer.proposers[i].express_state==1)
-                    list.add("收货："+Integer.toString(i + 1) + "\n\n接单状态：已被接单" + "\n接单人：" + proposer.proposers[i].user + "\n收货时间：\n    " + proposer.proposers[i].rece_time+"\n\n\n");
+                    list.add("收货"+ "\n\n接单状态：已被接单"  + "\n收货时间：" + proposer.proposers[i].rece_time+"\n\n");
                 else
-                    list.add("收货："+Integer.toString(i+ 1) + "\n\n接单状态：未被接单"+"\n\n\n");
+                    list.add("收货"+ "\n\n接单状态：未被接单"+"\n\n");
             }
             for (i=0; i < accepter.length; i++) {
-                list.add("取货："+Integer.toString(i  +1)+ "\n\n收货人：" + accepter.accepters[i].user + "\n收货时间：\n    " + accepter.accepters[i].rece_time +"\n收货地点：\n    "+accepter.accepters[i].dstplace+"\n\n\n");
+                list.add("取货"+ "\n\n收货时间：" + accepter.accepters[i].rece_time+"\n取货地点："+accepter.accepters[i].srcplace+"\n收货地点："+accepter.accepters[i].dstplace+"\n\n");
             }
             mListView.setAdapter(adapter);
             return list;

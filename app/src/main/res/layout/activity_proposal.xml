@@ -19,6 +19,7 @@
             android:layout_width="374dp"
             android:layout_height="449dp"
             android:layout_alignParentStart="true"
+            android:textColor="#4775b4"
             android:layout_alignParentTop="true"
             android:text="TextView"
             android:textSize="24sp" />

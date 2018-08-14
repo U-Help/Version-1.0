@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:background="#ffeb5100"
+        android:background="#ff4775b4"
         android:paddingLeft="10dp"
         android:gravity="center"
         android:textColor="#ffffff"
@@ -28,7 +28,7 @@
         android:layout_height="60dp"
         android:layout_alignTop="@id/textView2d"
         android:layout_toLeftOf="@id/textView2d"
-        android:background="@drawable/button_press3"
+        android:background="@drawable/change_color_btn"
         android:gravity="center"
         android:text="接  受"
         android:textColor="#ffffffff"
@@ -40,7 +40,7 @@
         android:layout_height="60dp"
         android:layout_alignTop="@id/textView2d"
         android:layout_toRightOf="@+id/textView2d"
-        android:background="@drawable/button_press3"
+        android:background="@drawable/change_color_btn"
         android:gravity="center"
         android:text="放  弃"
         android:textColor="#ffffffff"
@@ -142,7 +142,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="175dp"
         android:paddingLeft="10dp"
-        android:textColor="#eb5100"
+        android:textColor="#4775b4"
         android:textSize="20sp" />
 
     <TextView
@@ -153,7 +153,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="-175dp"
         android:paddingLeft="10dp"
-        android:textColor="#eb5100"
+        android:textColor="#4775b4"
         android:textSize="20sp" />
 
     <TextView
@@ -163,7 +163,7 @@
         android:layout_below="@+id/textView17d"
         android:layout_centerHorizontal="true"
         android:paddingLeft="10dp"
-        android:textColor="#eb5100"
+        android:textColor="#4775b4"
         android:textSize="20sp" />
 
     <TextView
@@ -173,7 +173,7 @@
         android:layout_below="@+id/textView18d"
         android:layout_centerHorizontal="true"
         android:paddingLeft="10dp"
-        android:textColor="#eb5100"
+        android:textColor="#4775b4"
         android:textSize="18sp" />
 
     <TextView

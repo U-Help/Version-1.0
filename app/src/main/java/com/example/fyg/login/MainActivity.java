@@ -1,14 +1,20 @@
 package com.example.fyg.login;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import org.json.JSONObject;
 
@@ -30,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
     private Button btnSetting;
     private EditText editUsername;
     private EditText editPassword;
+    private CheckBox rem_pw,auto_login;
+    private SharedPreferences sp;
+    private String username,password;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     @Override
@@ -38,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         _CollectorActivity.addActivity(this);
 
+        sp=this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         editUsername = findViewById(R.id.editUsername);
         editPassword = findViewById(R.id.editPassword);
         btnLogin = findViewById(R.id.btnLogin);
@@ -48,23 +58,76 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnRegister = findViewById(R.id.btnRegister);
+        btnSetting = findViewById(R.id.btnSetting);
+        rem_pw=(CheckBox)findViewById(R.id.rem_pw);
+        auto_login=(CheckBox)findViewById(R.id.auto_login);
+
+        if(sp.getBoolean("ISCHECK", false))
+        {
+            //设置默认是记录密码状态
+            rem_pw.setChecked(true);
+            editUsername.setText(sp.getString("username", ""));
+            editPassword.setText(sp.getString("password", ""));
+            //判断自动登陆多选框状态
+            if(sp.getBoolean("AUTO_ISCHECK", false))
+            {
+                //设置默认是自动登录状态
+                auto_login.setChecked(true);
+               postLogin();
+
+            }
+        }
+
         btnRegister.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, RegisterActivity.class));
             }
         });
-        btnSetting = findViewById(R.id.btnSetting);
+
         btnSetting.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,ForgetPasswordActivity.class));
             }
         });
+
+        //监听记住密码多选框按钮事件
+        rem_pw.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                if (rem_pw.isChecked()) {
+
+                    System.out.println("记住密码已选中");
+                    sp.edit().putBoolean("ISCHECK", true).commit();
+
+                }else {
+
+                    System.out.println("记住密码没有选中");
+                    sp.edit().putBoolean("ISCHECK", false).commit();
+
+                }
+
+            }
+        });
+
+        //监听自动登录多选框事件
+        auto_login.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                if (auto_login.isChecked()) {
+                    System.out.println("自动登录已选中");
+                    sp.edit().putBoolean("AUTO_ISCHECK", true).commit();
+
+                } else {
+                    System.out.println("自动登录没有选中");
+                    sp.edit().putBoolean("AUTO_ISCHECK", false).commit();
+                }
+            }
+        });
+
     }
 
     public void postLogin() {
         OkHttpClient client = new OkHttpClient();
-        String username = editUsername.getText().toString();
-        String password = editPassword.getText().toString();
+        username = editUsername.getText().toString();
+        password = editPassword.getText().toString();
 
         HashMap<String, String> map = new HashMap<>();
         map.put("username", username);
@@ -109,6 +172,15 @@ public class MainActivity extends AppCompatActivity {
                     if (flag) {
                         Looper.prepare();
                         Toast.makeText(MainActivity.this, "登录成功", Toast.LENGTH_LONG).show();
+                        //登录成功和记住密码框为选中状态才保存用户信息
+                        if(rem_pw.isChecked())
+                        {
+                            //记住用户名、密码、
+                            Editor editor = sp.edit();
+                            editor.putString("username", username);
+                            editor.putString("password",password);
+                            editor.commit();
+                        }
                         Intent intent = new Intent(MainActivity.this, GetActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);

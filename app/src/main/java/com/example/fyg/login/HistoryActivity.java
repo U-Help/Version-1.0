@@ -68,25 +68,12 @@ public class HistoryActivity extends Activity implements SwipeRefreshLayout.OnRe
             return list;
         }
         for(i=0;i<history.length;i++){
-            list.add("项目 "+Integer.toString(i+1)+"\n"+
-                    "取件人：" +history._histories[i].username+"\n"+
-                    "取件人电话："+history._histories[i].acc_phone+"\n"+
-                    "取货地点：\n    " +history._histories[i].srcplace+"\n"+
-                    "收货地点：\n    "+history._histories[i].dstplace+"\n"+
-                    "快件大小："+history._histories[i].size+"\n"+
-                    "交易价格："+history._histories[i].price+"\n"+
-                    "交易完成时间：\n    "+history._histories[i].accept_time+"\n\n");
+            list.add("交易用户：" +history._histories[i].username+"\n"+
+                    "完成时间："+history._histories[i].accept_time+"\n\n");
         }
         for(;i<history.length+history1.length;i++){
-            list.add("项目 "+Integer.toString(i+1)+"\n"+
-                    "帮人代取"+"\n"+
-                    "收件人：" +history1.histories[i-history.length].username+"\n"+
-                    "收件人电话："+history1.histories[i-history.length].pro_phone+"\n"+
-                    "取货地点：\n    " +history1.histories[i-history.length].srcplace+"\n"+
-                    "收货地点：\n    "+history1.histories[i-history.length].dstplace+"\n"+
-                    "快件大小："+history1.histories[i-history.length].size+"\n"+
-                    "交易价格："+history1.histories[i-history.length].price+"\n"+
-                    "交易完成时间：\n    "+history1.histories[i-history.length].accept_time+"\n\n");
+            list.add("交易用户：" +history1.histories[i-history.length].username+"\n"+
+                    "完成时间："+history1.histories[i-history.length].accept_time+"\n\n");
         }
         mListView.setAdapter(adapter);
         return list;
@@ -105,10 +92,10 @@ public class HistoryActivity extends Activity implements SwipeRefreshLayout.OnRe
             @Override
             public void run() {
                 //获取数据
-               list.clear();
-               getInfo();
-               getinfo();
-               getData();
+                list.clear();
+                getInfo();
+                getinfo();
+                getData();
                 mSwipeLayout.setRefreshing(false);
             }
         });

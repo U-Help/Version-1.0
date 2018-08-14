@@ -41,7 +41,7 @@
         android:background="@drawable/edit_bg"
         android:ems="10"
         android:gravity="fill_vertical"
-        android:hint="请输入邮箱地址"
+        android:hint="请输入邮箱地址(输入邮箱全称)"
         android:inputType="textEmailAddress"
         android:paddingLeft="10dp" />
 
@@ -54,7 +54,7 @@
         android:background="@drawable/edit_bg"
         android:ems="10"
         android:gravity="fill_vertical"
-        android:hint="请输入用户名"
+        android:hint="请输入用户名(长度小于20的非特殊字符)"
         android:inputType="textPersonName"
         android:paddingLeft="10dp" />
 
@@ -62,12 +62,12 @@
         android:id="@+id/editpassword"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/textView4r"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/edit_bg"
         android:ems="10"
         android:gravity="fill_vertical"
-        android:hint="请输入密码"
+        android:hint="请输入密码(6-16位数字字母组合)"
         android:inputType="textPassword"
         android:paddingLeft="10dp" />
 
@@ -75,12 +75,12 @@
         android:id="@+id/editTelephone"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/textView3r"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/edit_bg"
         android:ems="10"
         android:gravity="fill_vertical"
-        android:hint="请输入手机号"
+        android:hint="请输入手机号(使用中国大陆正确手机号)"
         android:inputType="phone"
         android:paddingLeft="10dp" />
 
